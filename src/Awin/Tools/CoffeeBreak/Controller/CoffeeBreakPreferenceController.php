@@ -14,45 +14,45 @@ class CoffeeBreakPreferenceController
 
     /**
      * Publishes the list of preferences in the requested format
+     * @param CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository
+     * @param string $format
+     * @return Response
      */
-    public function todayAction($format = "html")
+    public function todayAction(CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository, string $format = "html")
     {
-        $repository = new CoffeeBreakPreferenceRepository();
-        $t = $repository->getPreferencesForToday();
-
-        $formattedPreferences = [];
-        $contentType = "text/html";
+        $preferencesForToday = $coffeeBreakPreferenceRepository->getPreferencesForToday();
 
         switch ($format) {
             case "json":
-                $responseContent = $this->getJsonForResponse($t);
+                $responseContent = $this->getJsonForResponse($preferencesForToday);
                 $contentType = "application/json";
                 break;
 
             case "xml":
-                $responseContent = $this->getXmlForResponse($t);
+                $responseContent = $this->getXmlForResponse($preferencesForToday);
                 $contentType = "text/xml";
                 break;
 
             default:
-                $formattedPreferences[] = $this->getHtmlForResponse($t);
+                $responseContent = $this->getHtmlForResponse($preferencesForToday);
+                $contentType = "text/html";
         }
 
         return new Response($responseContent, 200, ['Content-Type' => $contentType]);
     }
 
     /**
+     * @param StaffMemberRepository $staffMemberRepository
+     * @param CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository
      * @param NotifierInterface $notifier
      * @param int $staffMemberId
      * @return Response
      */
-    public function notifyStaffMemberAction(NotifierInterface $notifier, int $staffMemberId) : Response
+    public function notifyStaffMemberAction(StaffMemberRepository $staffMemberRepository, CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository, NotifierInterface $notifier, int $staffMemberId) : Response
     {
-        $staffMemberRepository = new StaffMemberRepository();
         $staffMember = $staffMemberRepository->find($staffMemberId);
 
-        $repository = new CoffeeBreakPreferenceRepository();
-        $p = $repository->getPreferenceFor($staffMemberId, new \DateTime());
+        $p = $coffeeBreakPreferenceRepository->getPreferenceFor($staffMemberId, new \DateTime());
 
         $notificationSent = $notifier->notifyStaffMember($staffMember, $p);
 
