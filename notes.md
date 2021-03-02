@@ -15,9 +15,17 @@
 * output Response as abstract
 * New folder structure
 * constants
-
+* Linting
+* phpStan
+* Unsupported Accept type Exception tidy up.
+* Tests dont have Namespace
+* Tests at wrong level?
 
 
 ###### Composer install
 
 ```docker run --dns 192.168.1.254 -it -v $PWD:/opt/project --entrypoint ash php7.4-symfony-dev```
+
+Run Tests
+
+```docker run -it -v $PWD:/opt/project php7.4-symfony-dev /opt/project/vendor/phpunit/phpunit/phpunit /opt/project/src/Awin/Tools/CoffeeBreak/Tests```
