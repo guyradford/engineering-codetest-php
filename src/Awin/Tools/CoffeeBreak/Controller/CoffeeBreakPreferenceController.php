@@ -1,6 +1,8 @@
 <?php
 namespace Awin\Tools\CoffeeBreak\Controller;
 
+use Awin\Tools\CoffeeBreak\Model\CoffeeBreakPreferenceModel;
+use Awin\Tools\CoffeeBreak\Model\StaffMemberModel;
 use Awin\Tools\CoffeeBreak\Repository\CoffeeBreakPreferenceRepository;
 use Awin\Tools\CoffeeBreak\Repository\StaffMemberRepository;
 use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
@@ -8,19 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CoffeeBreakPreferenceController
 {
-    public function __construct()
-    {
-    }
 
     /**
      * Publishes the list of preferences in the requested format
-     * @param CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository
+     * @param CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel
      * @param string $format
      * @return Response
      */
-    public function todayAction(CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository, string $format = "html")
+    public function todayAction(CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel, string $format = "html")
     {
-        $preferencesForToday = $coffeeBreakPreferenceRepository->getPreferencesForToday();
+        $preferencesForToday = $coffeeBreakPreferenceModel->getPreferencesForToday();
 
         switch ($format) {
             case "json":
@@ -42,19 +41,19 @@ class CoffeeBreakPreferenceController
     }
 
     /**
-     * @param StaffMemberRepository $staffMemberRepository
-     * @param CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository
+     * @param StaffMemberModel $staffMemberModel
+     * @param CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel
      * @param NotifierInterface $notifier
      * @param int $staffMemberId
      * @return Response
      */
-    public function notifyStaffMemberAction(StaffMemberRepository $staffMemberRepository, CoffeeBreakPreferenceRepository $coffeeBreakPreferenceRepository, NotifierInterface $notifier, int $staffMemberId) : Response
+    public function notifyStaffMemberAction(StaffMemberModel $staffMemberModel, CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel, NotifierInterface $notifier, int $staffMemberId) : Response
     {
-        $staffMember = $staffMemberRepository->find($staffMemberId);
+        $staffMember = $staffMemberModel->getById($staffMemberId);
 
-        $p = $coffeeBreakPreferenceRepository->getPreferenceFor($staffMemberId, new \DateTime());
+        $staffMemberPreference = $coffeeBreakPreferenceModel->getPreferenceFor($staffMember, new \DateTime());
 
-        $notificationSent = $notifier->notifyStaffMember($staffMember, $p);
+        $notificationSent = $notifier->notifyStaffMember($staffMember, $staffMemberPreference);
 
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
     }
