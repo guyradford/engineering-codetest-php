@@ -1,5 +1,5 @@
 <?php
-namespace Awin\Tools\CoffeeBreak\Services;
+namespace Awin\Tools\CoffeeBreak\Services\Notifier;
 
 use Awin\Tools\CoffeeBreak\Entity\StaffMember;
 use Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference;

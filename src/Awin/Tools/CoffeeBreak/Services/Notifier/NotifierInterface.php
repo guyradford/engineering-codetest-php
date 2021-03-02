@@ -1,6 +1,4 @@
 <?php
-
-
 namespace Awin\Tools\CoffeeBreak\Services\Notifier;
 
 
