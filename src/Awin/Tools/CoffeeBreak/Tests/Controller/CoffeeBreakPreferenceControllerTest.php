@@ -7,8 +7,22 @@ use PHPUnit\Framework\TestCase;
 class CoffeeBreakPreferenceControllerTest extends TestCase
 {
 
+    public function todayActionWithNoPreferencesProvider(): array
+    {
+        return [
+            ['html', 'text/html', '<ul></ul>'],
+            ['json', 'application/json', '{"preferences":[]}'],
+            ['xml', 'text/xml', "<?xml version=\"1.0\"?>\n<root><preferences/></root>\n"],
+        ];
+    }
 
-    public function testTodayActionWithNoPreferencesAndDefaultResponseType()
+    /**
+     * @dataProvider todayActionWithNoPreferencesProvider
+     * @param string $inputType
+     * @param string $outputContentType
+     * @param string $outputContent
+     */
+    public function testTodayActionWithNoPreferences(string $inputType, string $outputContentType, string $outputContent)
     {
 
         // Create a Mock of CoffeeBreakPreferenceModel and mock getPreferencesForToday response.
@@ -26,10 +40,10 @@ class CoffeeBreakPreferenceControllerTest extends TestCase
         // Call todayAction on controller and get response for assertions.
         $response = $controller->todayAction(
             $coffeeBreakPreferenceModelMock,
-            'html'
+            $inputType
         );
 
-        $this->assertEquals('text/html', $response->headers->get('Content-Type'));
-        $this->assertEquals('<ul></ul>', $response->getContent());
+        $this->assertEquals($outputContentType, $response->headers->get('Content-Type'));
+        $this->assertEquals($outputContent, $response->getContent());
     }
 }

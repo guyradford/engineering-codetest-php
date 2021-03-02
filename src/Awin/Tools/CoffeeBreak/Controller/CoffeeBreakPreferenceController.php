@@ -72,7 +72,7 @@ class CoffeeBreakPreferenceController
 
     private function getXmlForResponse(array $preferences)
     {
-        $preferencesNode = new \SimpleXMLElement("preferences");
+        $preferencesNode = new \SimpleXMLElement("<root><preferences/></root>");
         foreach ($preferences as $preference) {
             $preferencesNode->addChild($preference->getAsXmlNode());
         }
