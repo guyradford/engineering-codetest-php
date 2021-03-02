@@ -3,7 +3,7 @@ namespace Awin\Tools\CoffeeBreak\Controller;
 
 use Awin\Tools\CoffeeBreak\Repository\CoffeeBreakPreferenceRepository;
 use Awin\Tools\CoffeeBreak\Repository\StaffMemberRepository;
-use Awin\Tools\CoffeeBreak\Services\SlackNotifier;
+use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class CoffeeBreakPreferenceController
@@ -42,10 +42,11 @@ class CoffeeBreakPreferenceController
     }
 
     /**
+     * @param NotifierInterface $notifier
      * @param int $staffMemberId
      * @return Response
      */
-    public function notifyStaffMemberAction($staffMemberId)
+    public function notifyStaffMemberAction(NotifierInterface $notifier, int $staffMemberId) : Response
     {
         $staffMemberRepository = new StaffMemberRepository();
         $staffMember = $staffMemberRepository->find($staffMemberId);
@@ -53,7 +54,6 @@ class CoffeeBreakPreferenceController
         $repository = new CoffeeBreakPreferenceRepository();
         $p = $repository->getPreferenceFor($staffMemberId, new \DateTime());
 
-        $notifier = new SlackNotifier();
         $notificationSent = $notifier->notifyStaffMember($staffMember, $p);
 
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
