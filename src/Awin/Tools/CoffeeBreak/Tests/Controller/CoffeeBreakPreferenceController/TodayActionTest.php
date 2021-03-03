@@ -1,6 +1,9 @@
 <?php
+namespace Awin\Tools\CoffeeBreak\Tests\Controller\CoffeeBreakPreferenceController;
 
 use Awin\Tools\CoffeeBreak\Controller\CoffeeBreakPreferenceController;
+use Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference;
+use Awin\Tools\CoffeeBreak\Entity\StaffMember;
 use Awin\Tools\CoffeeBreak\Model\CoffeeBreakPreferenceModel;
 use PHPUnit\Framework\TestCase;
 
@@ -64,7 +67,7 @@ class TodayActionTest extends TestCase
      */
     public function testTodayActionWithListOfPreferences(string $inputType, string $outputContentType, string $outputContent)
     {
-        $testStaffMember = new \Awin\Tools\CoffeeBreak\Entity\StaffMember();
+        $testStaffMember = new StaffMember();
         $testStaffMember->setName('Joe Blogs');
 
         // Create a Mock of CoffeeBreakPreferenceModel and mock getPreferencesForToday response.
@@ -74,8 +77,8 @@ class TodayActionTest extends TestCase
             ->method('getPreferencesForToday')
             ->willReturn(
                 [
-                    new \Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference('food', 'sandwich', $testStaffMember),
-                    new \Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference('drink', 'coffee', $testStaffMember),
+                    new CoffeeBreakPreference('food', 'sandwich', $testStaffMember),
+                    new CoffeeBreakPreference('drink', 'coffee', $testStaffMember),
                 ]
             );
 

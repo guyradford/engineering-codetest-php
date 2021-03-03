@@ -1,8 +1,11 @@
 <?php
+namespace Awin\Tools\CoffeeBreak\Tests\Services\Notifier;
 
 use Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference;
 use Awin\Tools\CoffeeBreak\Entity\StaffMember;
+use Awin\Tools\CoffeeBreak\Services\Notifier\EmailNotifier;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class EmailNotifierTest extends TestCase
 {
@@ -13,7 +16,7 @@ class EmailNotifierTest extends TestCase
         $staff->setEmail("test@example.com");
         $preference = new CoffeeBreakPreference("drink", "coffee", $staff);
 
-        $notificationService = new \Awin\Tools\CoffeeBreak\Services\Notifier\EmailNotifier();
+        $notificationService = new EmailNotifier();
         $status = $notificationService->notifyStaffMember($staff, $preference);
 
         $this->assertTrue($status);
@@ -23,9 +26,9 @@ class EmailNotifierTest extends TestCase
     {
         $staff = new StaffMember();
         $preference = new CoffeeBreakPreference("drink", "tea", $staff);
-        $notificationService = new \Awin\Tools\CoffeeBreak\Services\Notifier\EmailNotifier();
+        $notificationService = new EmailNotifier();
 
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $status = $notificationService->notifyStaffMember($staff, $preference);
     }
 }
