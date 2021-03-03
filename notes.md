@@ -3,23 +3,32 @@
 ##### Initial Observations
 
 * Old version of Symfony (v3.4)
-* Move output formatters to service
+* Move output formatters to service?
 * ~~Get tests running~~
 * ~~Composer Install~~
 * Create Docker Runner container
 * notifyStaffMemberAction does not support output formatting
-* TODO: Add Email notifier
- * Add interface/abstract
+* ~~TODO: Add Email notifier~~
+ * ~~Add interface/abstract~~
 * Add tests
-* output format as header... lookup standard
+ * Controllers
+  * CoffeeBreakPreferenceController.php
+   * ~~todayAction~~
+   * notifyStaffMemberAction
+ * Services
+  * ~~Notifier~~
+   * ~~Email~~
+   * ~~Slack~~
+* output format as http request header... lookup standard... Accept
 * output Response as abstract
-* New folder structure
-* constants
+* New folder structure for test folder
+* constants/Enums
+* validation
 * Linting
 * phpStan
 * Unsupported Accept type Exception tidy up.
 * Tests dont have Namespace
-* Tests at wrong level?
+* Tests at wrong folder level?
 * notifyStaffMemberAction is not standard
 * Test mocks not returning correct object type as expected... to investigate.
 
