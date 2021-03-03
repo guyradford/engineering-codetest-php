@@ -21,18 +21,20 @@
         * ~~Slack~~
 * output format as http request header... lookup standard... Accept
 * output Response as abstract
-* New folder structure for test folder
+* ~~New folder structure for test folder~~
 * constants/Enums
 * validation
 * Linting
 * phpStan
-* Unsupported Accept type Exception tidy up.
-* Tests dont have Namespace
+* TODO: Unsupported Accept type Exception tidy up.
+* ~~Tests dont have Namespace~~
 * Tests at wrong folder level?
 * notifyStaffMemberAction is not standard
 * Test mocks not returning correct object type as expected... to investigate.
 * notifyStaffMemberAction return 200 when an error occurred.
+* notifyStaffMemberAction needs content type setting for response.
 * getPreferenceFor could be replaced by getPreferenceForToday()
+
 
 ### Actions Taken
 
