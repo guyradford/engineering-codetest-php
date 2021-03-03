@@ -21,7 +21,19 @@
 * Tests dont have Namespace
 * Tests at wrong level?
 * notifyStaffMemberAction is not standard
-* Test mocks not returning object type as expected... to investigate.
+* Test mocks not returning correct object type as expected... to investigate.
+
+
+###### Actions Taken
+
+1. Build Docker image for php7.4 for dev and ran `composer install` 
+1. Added email notifier/ notifier interface and tests. Passed in Notifier to controller action.
+1. Refactored Controller Actions to pass in dependencies to allow testing of controller
+1. Creation of models as Mocking Repositories for unit testing as it is not recommended (https://symfony.com/doc/3.4/testing/doctrine.html)
+1. Completed initial tests for TodayAction in CoffeeBreakPreferenceController and added Data Providers 
+ * Fixed wrong function names and invalid xml etc.
+1.
+
 
 
 ###### Composer install

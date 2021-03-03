@@ -3,8 +3,6 @@ namespace Awin\Tools\CoffeeBreak\Controller;
 
 use Awin\Tools\CoffeeBreak\Model\CoffeeBreakPreferenceModel;
 use Awin\Tools\CoffeeBreak\Model\StaffMemberModel;
-use Awin\Tools\CoffeeBreak\Repository\CoffeeBreakPreferenceRepository;
-use Awin\Tools\CoffeeBreak\Repository\StaffMemberRepository;
 use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -74,7 +72,7 @@ class CoffeeBreakPreferenceController
     {
         $preferencesNode = new \SimpleXMLElement("<root><preferences/></root>");
         foreach ($preferences as $preference) {
-            $preferencesNode->addChild($preference->getAsXmlNode());
+            $preferencesNode->addChild($preference->getAsXmlElement());
         }
 
         return $preferencesNode->asXML();

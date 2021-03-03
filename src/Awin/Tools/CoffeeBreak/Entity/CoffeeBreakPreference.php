@@ -1,8 +1,6 @@
 <?php
 namespace Awin\Tools\CoffeeBreak\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Table("coffee_break_preference")
  * @ORM\Entity(repositoryClass="Awin\Tools\CoffeeBreak\Repository\CoffeeBreakPreferenceRepository")
@@ -69,9 +67,12 @@ class CoffeeBreakPreference
             }
         }
 
-        $this->type = $type;
+//        $this->type = $type;
+        $this->setType($type);
+        $this->setSubType($subType);
+        $this->setRequestedBy($requestedBy);
 
-        $this->requestedBy = $requestedBy;
+//        $this->requestedBy = $requestedBy;
         $this->setDetails($details);
     }
 
