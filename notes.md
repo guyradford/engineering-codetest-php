@@ -14,7 +14,7 @@
   * Controllers
     * CoffeeBreakPreferenceController.php
       * ~~todayAction~~
-      * notifyStaffMemberAction
+      * ~~notifyStaffMemberAction~~
     * Services
       * ~~Notifier~~
         * ~~Email~~
@@ -26,15 +26,15 @@
 * validation
 * Linting
 * phpStan
-* TODO: Unsupported Accept type Exception tidy up.
+* Unsupported Accept type Exception tidy up.
 * ~~Tests dont have Namespace~~
-* Tests at wrong folder level?
+* Tests at wrong folder level? move to root?
 * notifyStaffMemberAction is not standard
 * Test mocks not returning correct object type as expected... to investigate.
 * notifyStaffMemberAction return 200 when an error occurred.
 * notifyStaffMemberAction needs content type setting for response.
 * getPreferenceFor could be replaced by getPreferenceForToday()
-
+* I dont like the output split between Repository and Controller
 
 ### Actions Taken
 
@@ -46,6 +46,7 @@
    * Fixed wrong function names and invalid xml etc.
 1. Added Namespaces to tests
 1. Add tests for notifyStaffMemberAction
+1. Output Formatting
 
 
 ###### Composer install
