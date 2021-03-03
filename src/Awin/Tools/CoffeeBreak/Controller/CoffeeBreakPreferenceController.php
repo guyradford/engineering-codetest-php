@@ -49,9 +49,9 @@ class CoffeeBreakPreferenceController
     {
         $staffMember = $staffMemberModel->getById($staffMemberId);
 
-        $staffMemberPreference = $coffeeBreakPreferenceModel->getPreferenceFor($staffMember, new \DateTime());
+        $coffeeBreakPreference = $coffeeBreakPreferenceModel->getPreferencesFor($staffMember, new \DateTime());
 
-        $notificationSent = $notifier->notifyStaffMember($staffMember, $staffMemberPreference);
+        $notificationSent = $notifier->notifyStaffMember($staffMember, $coffeeBreakPreference);
 
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
     }

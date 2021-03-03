@@ -1,6 +1,6 @@
 
 
-##### Initial Observations
+### Observations
 
 * Old version of Symfony (v3.4)
 * Move output formatters to service?
@@ -31,9 +31,10 @@
 * Tests at wrong folder level?
 * notifyStaffMemberAction is not standard
 * Test mocks not returning correct object type as expected... to investigate.
+* notifyStaffMemberAction return 200 when an error occurred.
+* getPreferenceFor could be replaced by getPreferenceForToday()
 
-
-###### Actions Taken
+### Actions Taken
 
 1. Build Docker image for php7.4 for dev and ran `composer install` 
 1. Added email notifier/ notifier interface and tests. Passed in Notifier to controller action.
@@ -42,7 +43,7 @@
 1. Completed initial tests for TodayAction in CoffeeBreakPreferenceController and added Data Providers 
    * Fixed wrong function names and invalid xml etc.
 1. Added Namespaces to tests
-
+1. Add tests for notifyStaffMemberAction
 
 
 ###### Composer install

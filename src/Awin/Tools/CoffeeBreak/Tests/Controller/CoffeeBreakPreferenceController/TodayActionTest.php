@@ -48,6 +48,8 @@ class TodayActionTest extends TestCase
 
         $this->assertEquals($outputContentType, $response->headers->get('Content-Type'));
         $this->assertEquals($outputContent, $response->getContent());
+        $this->assertEquals(200, $response->getStatusCode());
+
     }
 
     public function todayActionWithListOfPreferencesProvider(): array
@@ -93,5 +95,7 @@ class TodayActionTest extends TestCase
 
         $this->assertEquals($outputContentType, $response->headers->get('Content-Type'));
         $this->assertEquals($outputContent, $response->getContent());
+        $this->assertEquals(200, $response->getStatusCode());
+
     }
 }

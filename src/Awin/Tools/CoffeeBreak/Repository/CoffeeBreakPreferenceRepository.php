@@ -15,4 +15,19 @@ class CoffeeBreakPreferenceRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param int $staffMemberId
+     * @param \DateTime $dateTime
+     * @return array
+     */
+    public function getPreferencesFor(int $staffMemberId, \DateTime $dateTime): array
+    {
+        /**
+         * STUB
+         * Query to select all coffee preferences for the given staff member on the given day.
+         */
+
+        return [];
+    }
 }

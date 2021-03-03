@@ -38,8 +38,8 @@ class CoffeeBreakPreferenceModel
      * @param \DateTime $dateTime
      * @return CoffeeBreakPreference
      */
-    public function getPreferenceFor(StaffMember $staffMember, \DateTime $dateTime) : CoffeeBreakPreference
+    public function getPreferencesFor(StaffMember $staffMember, \DateTime $dateTime) : CoffeeBreakPreference
     {
-        $p = $this->coffeeBreakPreferenceRepository->getPreferenceFor($staffMember->getId(), $dateTime);
+        return $this->coffeeBreakPreferenceRepository->getPreferencesFor($staffMember->getId(), $dateTime);
     }
 }
