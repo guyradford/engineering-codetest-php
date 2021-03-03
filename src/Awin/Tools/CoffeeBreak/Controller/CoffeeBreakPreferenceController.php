@@ -56,27 +56,27 @@ class CoffeeBreakPreferenceController
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
     }
 
-    private function getJsonForResponse(array $preferences)
-    {
-        return json_encode([
-            "preferences" => array_map(
-                function ($preference) {
-                    return $preference->getAsArray();
-                },
-                $preferences
-            )
-        ]);
-    }
+//    private function getJsonForResponse(array $preferences)
+//    {
+//        return json_encode([
+//            "preferences" => array_map(
+//                function ($preference) {
+//                    return $preference->getAsArray();
+//                },
+//                $preferences
+//            )
+//        ]);
+//    }
 
-    private function getXmlForResponse(array $preferences)
-    {
-        $preferencesNode = new \SimpleXMLElement("<root><preferences/></root>");
-        foreach ($preferences as $preference) {
-            $preferencesNode->addChild($preference->getAsXmlElement());
-        }
-
-        return $preferencesNode->asXML();
-    }
+//    private function getXmlForResponse(array $preferences)
+//    {
+//        $preferencesNode = new \SimpleXMLElement("<root><preferences/></root>");
+//        foreach ($preferences as $preference) {
+//            $preferencesNode->addChild($preference->getAsXmlElement());
+//        }
+//
+//        return $preferencesNode->asXML();
+//    }
 
     private function getHtmlForResponse(array $preferences)
     {

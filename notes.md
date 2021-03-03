@@ -35,6 +35,8 @@
 * notifyStaffMemberAction needs content type setting for response.
 * getPreferenceFor could be replaced by getPreferenceForToday()
 * I dont like the output split between Repository and Controller
+* I dont like the hand cranked XML in the XML Item Renderer
+* I dont like the hand cranked HTML in the HTML Renderer
 
 ### Actions Taken
 
