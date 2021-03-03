@@ -41,7 +41,7 @@
 1. Creation of models as Mocking Repositories for unit testing as it is not recommended (https://symfony.com/doc/3.4/testing/doctrine.html)
 1. Completed initial tests for TodayAction in CoffeeBreakPreferenceController and added Data Providers 
  * Fixed wrong function names and invalid xml etc.
-1.
+1. Added Namespaces to tests
 
 
 
