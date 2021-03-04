@@ -3,24 +3,24 @@
 Original [readme.md](readme-old.md)
 
 This project is clearly just a small standalone section of what would be a much more complete project. 
-For example there is no config, auto-wiring, no entry point for Http requests ect. I have kep all my work
+For example there is no config, auto-wiring, no entrypoint for Http requests ect. I have kept all my changes
 within that spirit.
 
 As was stated this exercise is the proverbial 'piece of string'. Therefore, have completed some of the
-more important refactoring, but this is by no means all the required refactoring. I have included a list
-of actions taken, a list of project observations, and a ToDo list of what i would do next... I doubt this
-list ill be complete either.   
+more important refactoring, but this is by no means all the refactoring required. I have included a list
+of actions taken, a list of project observations, and a ToDo list of what I would do next... I doubt any of these
+lists are complete either.   
 
 
 I have broken this document into sections:
 
 **Observations** - This is a simple list of things I spotted, things todo, questions etc. 
-This list was in continue use throughout the project. I then crossed off item I completed.
+The list was updated continuously throughout the project. I have crossed off items I completed.
 
-**Actions Taken** - This list is the order i did change to the project, it will vaguely match the 
+**Actions Taken** - This list is the order I did changes to the project, it will vaguely match the 
 commit history, however the commit history is not quite such a linear path.
 
-**ToDo** - This is a list of know items that still need to be address, questions to answer 
+**ToDo** - This is a list of known items that still need to be address, questions to answer 
 and future improvements.
 
 
@@ -58,14 +58,14 @@ and future improvements.
 * notifyStaffMemberAction needs content type setting for response.
 * getPreferenceFor could be replaced by new getPreferenceForToday() method
 * ~~I dont like the output split between Repository and Controller~~
-* I dont like the hand cranked XML in the XML Item Renderer
-* I dont like the hand cranked HTML in the HTML Renderer
+* I dont like the hand coded XML in the XML Item Renderer, generate with code
+* I dont like the hand coded HTML in the HTML Renderer, generate with code
 * Missing test case for default Accept type.
 * No logging
 
 ### Actions Taken
 
-1. Build a Docker image for php7.4 for dev and ran `composer install` and get the tests to run.
+1. Build a Docker image for php7.4 for dev and ran `composer install` and got the tests to run.
 1. Added email notifier,  notifier interface and tests. Passed in Notifier to controller action.
 1. Refactored Controller Actions to pass in dependencies to allow better testing of controller methods.
 1. Creation of models as Mocking Repositories for unit testing as it is not recommended 
