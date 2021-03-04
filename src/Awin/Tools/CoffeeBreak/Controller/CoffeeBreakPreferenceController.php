@@ -3,6 +3,9 @@ namespace Awin\Tools\CoffeeBreak\Controller;
 
 use Awin\Tools\CoffeeBreak\Model\CoffeeBreakPreferenceModel;
 use Awin\Tools\CoffeeBreak\Model\StaffMemberModel;
+use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\HtmlCoffeeBreakPreferenceListRenderer;
+use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\JsonCoffeeBreakPreferenceListRenderer;
+use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\XmlCoffeeBreakPreferenceListRenderer;
 use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,17 +24,20 @@ class CoffeeBreakPreferenceController
 
         switch ($format) {
             case "json":
-                $responseContent = $this->getJsonForResponse($preferencesForToday);
+                $renderer = new JsonCoffeeBreakPreferenceListRenderer();
+                $responseContent = $renderer->render($preferencesForToday);
                 $contentType = "application/json";
                 break;
 
             case "xml":
-                $responseContent = $this->getXmlForResponse($preferencesForToday);
+                $renderer = new XmlCoffeeBreakPreferenceListRenderer();
+                $responseContent = $renderer->render($preferencesForToday);
                 $contentType = "text/xml";
                 break;
 
             default:
-                $responseContent = $this->getHtmlForResponse($preferencesForToday);
+                $renderer = new HtmlCoffeeBreakPreferenceListRenderer();
+                $responseContent = $renderer->render($preferencesForToday);
                 $contentType = "text/html";
         }
 
@@ -56,35 +62,4 @@ class CoffeeBreakPreferenceController
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
     }
 
-//    private function getJsonForResponse(array $preferences)
-//    {
-//        return json_encode([
-//            "preferences" => array_map(
-//                function ($preference) {
-//                    return $preference->getAsArray();
-//                },
-//                $preferences
-//            )
-//        ]);
-//    }
-
-//    private function getXmlForResponse(array $preferences)
-//    {
-//        $preferencesNode = new \SimpleXMLElement("<root><preferences/></root>");
-//        foreach ($preferences as $preference) {
-//            $preferencesNode->addChild($preference->getAsXmlElement());
-//        }
-//
-//        return $preferencesNode->asXML();
-//    }
-
-    private function getHtmlForResponse(array $preferences)
-    {
-        $html = "<ul>";
-        foreach ($preferences as $preference) {
-            $html .= $preference->getAsListElement();
-        }
-        $html .= "</ul>";
-        return $html;
-    }
 }

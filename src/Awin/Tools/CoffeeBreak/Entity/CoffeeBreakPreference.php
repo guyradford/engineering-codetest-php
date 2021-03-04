@@ -155,39 +155,4 @@ class CoffeeBreakPreference
         return $this->details;
     }
 
-//    public function getAsXmlElement()
-//    {
-//        $xml = "<preference type='".$this->getType()."' subtype='".$this->getSubType()."'>";
-//        $xml .= "<requestedBy>".$this->getRequestedBy()->getName()."</requestedBy>";
-//        $xml .= "<details>".$this->getDetails()."</details>";
-//        $xml .= "</preference>";
-//        return $xml;
-//    }
-
-//    public function getAsArray()
-//    {
-//        return [
-//            "type" => $this->getType(),
-//            "subType" => $this->getSubType(),
-//            "requestedBy" => [
-//                "name" => $this->getRequestedBy()->getName()
-//            ],
-//            "details" => $this->getDetails()
-//        ];
-//    }
-
-//    public function getAsListElement()
-//    {
-//        $detailsString = implode(
-//            ",",
-//            array_map(
-//                function ($detailKey, $detailValue) {
-//                    return "$detailKey : $detailValue";
-//                },
-//                array_keys($this->getDetails()),
-//                array_values($this->getDetails())
-//            )
-//        );
-//        return "<li>".$this->getRequestedBy()->getName()." would like a ".$this->getSubtype()." ($detailsString)</li>";
-//    }
 }
