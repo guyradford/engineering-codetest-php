@@ -1,18 +1,25 @@
 <?php
 
 
-namespace Awin\Tools\CoffeeBreak\Tests\Services\ItemRenderer;
+namespace Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer;
 
 
 use Awin\Tools\CoffeeBreak\Entity\CoffeeBreakPreference;
 
-class CoffeeBreakPreferenceHtmlItemRenderer implements CoffeeBreakPreferenceItemRendererInterface
+class HtmlCoffeeBreakPreferenceListRenderer implements CoffeeBreakPreferenceListRendererInterface
 {
 
-    /**
-     * @inheritDoc
-     */
-    public function renderItem(CoffeeBreakPreference $item)
+    public function render(array $items): string
+    {
+        $html = "<ul>";
+        foreach ($items as $item) {
+            $html .=  $this->renderItem($item);
+        }
+        $html .= "</ul>";
+        return $html;
+    }
+
+    private function renderItem(CoffeeBreakPreference $item)
     {
         $detailsString = implode(
             ",",
@@ -26,4 +33,5 @@ class CoffeeBreakPreferenceHtmlItemRenderer implements CoffeeBreakPreferenceItem
         );
         return "<li>".$item->getRequestedBy()->getName()." would like a ".$item->getSubtype()." ($detailsString)</li>";
     }
+
 }
