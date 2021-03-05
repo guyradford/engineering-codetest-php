@@ -7,6 +7,7 @@ use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\HtmlCoffee
 use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\JsonCoffeeBreakPreferenceListRenderer;
 use Awin\Tools\CoffeeBreak\Services\CoffeeBreakPreferenceListRenderer\XmlCoffeeBreakPreferenceListRenderer;
 use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
+use Awin\Tools\CoffeeBreak\Services\Renderer\PreferencesForTodayRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
 class CoffeeBreakPreferenceController
@@ -22,22 +23,21 @@ class CoffeeBreakPreferenceController
     {
         $preferencesForToday = $coffeeBreakPreferenceModel->getPreferencesForToday();
 
+        $renderer = new PreferencesForTodayRenderer();
+
         switch ($format) {
             case "json":
-                $renderer = new JsonCoffeeBreakPreferenceListRenderer();
-                $responseContent = $renderer->render($preferencesForToday);
+                $responseContent = $renderer->renderJson($preferencesForToday);
                 $contentType = "application/json";
                 break;
 
             case "xml":
-                $renderer = new XmlCoffeeBreakPreferenceListRenderer();
-                $responseContent = $renderer->render($preferencesForToday);
+                $responseContent = $renderer->renderXml($preferencesForToday);
                 $contentType = "text/xml";
                 break;
 
             default:
-                $renderer = new HtmlCoffeeBreakPreferenceListRenderer();
-                $responseContent = $renderer->render($preferencesForToday);
+                $responseContent = $renderer->renderHtml($preferencesForToday);
                 $contentType = "text/html";
         }
 
