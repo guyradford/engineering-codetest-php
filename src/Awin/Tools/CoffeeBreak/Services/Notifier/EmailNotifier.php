@@ -9,11 +9,26 @@ use PHPUnit\Framework\MockObject\RuntimeException;
 class EmailNotifier implements NotifierInterface
 {
     /**
-     * @param StaffMember $staffMember
-     * @param CoffeeBreakPreference $preference
+     * @var mixed
+     */
+    private $config;
+
+    /**
+     * EmailNotifier constructor.
+     * @param $config
+     */
+    public function __construct($config)
+    {
+        $this->config = $config;
+    }
+
+
+    /**
+     * @param string $toAddress
+     * @param string $message
      * @return bool
      */
-    public function notifyStaffMember(StaffMember $staffMember, CoffeeBreakPreference $preference) :bool
+    public function notifyStaffMember(string $toAddress, string $message) : bool
     {
         /**
          * Imagine that this function:
@@ -21,9 +36,7 @@ class EmailNotifier implements NotifierInterface
          * returns true or false status of notification sent
          */
 
-        if (empty($staffMember->getEmail())) {
-            throw new RuntimeException("Cannot send notification - no email address.");
-        }
+
 
         return true;
     }

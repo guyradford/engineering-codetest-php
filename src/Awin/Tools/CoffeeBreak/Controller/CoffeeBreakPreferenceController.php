@@ -4,6 +4,7 @@ namespace Awin\Tools\CoffeeBreak\Controller;
 use Awin\Tools\CoffeeBreak\Model\CoffeeBreakPreferenceModel;
 use Awin\Tools\CoffeeBreak\Model\StaffMemberModel;
 use Awin\Tools\CoffeeBreak\Services\Notifier\NotifierInterface;
+use Awin\Tools\CoffeeBreak\Services\NotifyStaffMember;
 use Awin\Tools\CoffeeBreak\Services\Renderer\PreferencesForTodayRenderer;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,19 +27,14 @@ class CoffeeBreakPreferenceController extends ControllerAbstract
     }
 
     /**
-     * @param StaffMemberModel $staffMemberModel
-     * @param CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel
-     * @param NotifierInterface $notifier
+     * @param NotifyStaffMember $notifyStaffMember
      * @param int $staffMemberId
      * @return Response
+     * @throws \Exception
      */
-    public function notifyStaffMemberAction(StaffMemberModel $staffMemberModel, CoffeeBreakPreferenceModel $coffeeBreakPreferenceModel, NotifierInterface $notifier, int $staffMemberId) : Response
+    public function notifyStaffMemberAction(NotifyStaffMember $notifyStaffMember, int $staffMemberId) : Response
     {
-        $staffMember = $staffMemberModel->getById($staffMemberId);
-
-        $coffeeBreakPreference = $coffeeBreakPreferenceModel->getPreferencesFor($staffMember, new \DateTime());
-
-        $notificationSent = $notifier->notifyStaffMember($staffMember, $coffeeBreakPreference);
+        $notificationSent = $notifyStaffMember->notify($staffMemberId);
 
         return new Response($notificationSent ? "OK" : "NOT OK", 200);
     }

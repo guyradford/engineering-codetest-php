@@ -7,11 +7,13 @@ use Awin\Tools\CoffeeBreak\Entity\StaffMember;
 
 interface NotifierInterface
 {
+
+
     /**
-     * @param StaffMember $staffMember
-     * @param CoffeeBreakPreference $preference
+     * @param string $toAddress
+     * @param string $message
      * @return bool
-    */
-    public function notifyStaffMember(StaffMember $staffMember, CoffeeBreakPreference $preference) : bool;
+     */
+    public function notifyStaffMember(string $toAddress, string $message) : bool;
 
 }
